@@ -1,0 +1,1 @@
+INSERT INTO t_permission (name) VALUES ('ROLE_USER'), ('ROLE_ADMIN');
