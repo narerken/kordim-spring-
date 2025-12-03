@@ -19,35 +19,36 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public List<MovieDto> getAll() {
         List<Movie> movies = movieRepository.findAll();
-
-        movies.forEach(m -> m.getGenres().size());
-
         return movieMapper.toDtoList(movies);
     }
 
     @Override
-    public void getById(Long id){
+    public MovieDto getById(Long id){
         Movie movie = movieRepository.findById(id).orElse(null);
-        if(movie != null) movie.getGenres().size();
+        if(movie == null) return null;
+        movie.getGenres().size();
+        return movieMapper.toDto(movie);
     }
 
     @Override
-    public void addMovie(MovieDto movieDto){
+    public MovieDto addMovie(MovieDto movieDto){
         Movie movie = movieMapper.toEntity(movieDto);
-        movieRepository.save(movie);
+        movie = movieRepository.save(movie);
+        return movieMapper.toDto(movie);
     }
 
     @Override
-    public void updateMovie(Long id, MovieDto movieDto){
+    public MovieDto updateMovie(Long id, MovieDto movieDto){
         Movie movie = movieRepository.findById(id).orElse(null);
-        if(movie == null) return;
+        if(movie == null) return null;
 
         movie.setTitle(movieDto.getTitleDto());
         movie.setYear(movieDto.getYearDto());
         movie.setCountry(movieMapper.toEntity(movieDto).getCountry());
         movie.setGenres(movieMapper.toEntity(movieDto).getGenres());
 
-        movieRepository.save(movie);
+        movie = movieRepository.save(movie);
+        return movieMapper.toDto(movie);
     }
 
     @Override

@@ -24,10 +24,10 @@ public class Movie {
     private int year;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "t_country")
+    @JoinColumn(name = "country_id")
     private Country country;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "movie_genres",
             joinColumns = @JoinColumn(name = "movie_id"),

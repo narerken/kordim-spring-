@@ -20,20 +20,17 @@ public class MovieController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Long id ){
-        movieService.getById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(movieService.getById(id), HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<?> addMovie(@RequestBody MovieDto movieDto){
-        movieService.addMovie(movieDto);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(movieService.addMovie(movieDto), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateMovie(@PathVariable("id") Long id, @RequestBody MovieDto movieDto){
-        movieService.updateMovie(id, movieDto);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(movieService.updateMovie(id, movieDto), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
